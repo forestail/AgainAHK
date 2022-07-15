@@ -109,7 +109,7 @@ Execute:
 	}
 	newHistory := recent
 
-	LogWrite("AutoType," . againMacro.MaxIndex())
+	LogWrite("Again," . againMacro.MaxIndex())
 
 	SetTimer, ClearKbdMacro, On
 Return
