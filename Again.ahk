@@ -6,7 +6,6 @@
 ; 2022/07/15	公開 by forestail
 ; 
 ; ※呼び出しホットキーのデフォルトは[Ctrl + l]になっているので、好みのものに変更してください。
-; 
 
 #UseHook On
 #KeyHistory 50
@@ -54,7 +53,7 @@ Return
 
 
 ;;
-;; "xyzabcdefg" と "abcdefghij" から "hij" を得る（AHF版では実際には配列）
+;; "xyzabcdefg" と "abcdefghij" から "hij" を得る（AHK版では実際には配列）
 ;;
 GetPostfix(s1, s2){
 	len1 := s1.MaxIndex()
