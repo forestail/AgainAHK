@@ -1,7 +1,7 @@
 ; Again.ahk
 ; 
 ; 増井俊之先生のAgainのAutoHotKey実装。
-; 参考：https://github.com/masui/Again
+; 参考：https://scrapbox.io/again/
 ; 
 ; 2022/07/15	公開 by forestail
 ; 
@@ -23,6 +23,8 @@ global seqKey := Object()
 ; Import ini file.(Again.ini)
 IniRead, strInvokeHotKey, %A_ScriptDir%\Again.ini, Main, InvokeHotKey , ^l
 IniRead, strSuspendHotKey, %A_ScriptDir%\Again.ini, Main, SuspendHotKey , ^+l
+IniRead, strResetHotKey, %A_ScriptDir%\Again.ini, Main, ResetHotKey , ~esc
+IniRead, numClearInterval, %A_ScriptDir%\Again.ini, Main, ClearInterval , 1000
 IniRead, flgEnableLog, %A_ScriptDir%\Again.ini, Main, EnableLog , 1
 IniRead, strLogPath, %A_ScriptDir%\Again.ini, Main, LogPath , Againlog.txt
 
@@ -31,8 +33,9 @@ SetWorkingDir %A_ScriptDir%
 
 Hotkey, %strInvokeHotKey%, Execute
 Hotkey, %strSuspendHotKey%, SuspendMacro
+Hotkey, %strResetHotKey%, Reset
 
-SetTimer, ClearKbdMacro, 1000
+SetTimer, ClearKbdMacro, %numClearInterval%
 Return
 
 
@@ -50,7 +53,13 @@ ClearKbdMacro:
 	}
 Return
 
-
+Reset:
+	SetTimer, ClearKbdMacro, Off
+	againMacro := []
+	newHistory := GetHistoryArray(ParseKeyHistory())
+	oldHistory := newHistory
+	SetTimer, ClearKbdMacro, On
+Return
 
 ;;
 ;; "xyzabcdefg" と "abcdefghij" から "hij" を得る（AHK版では実際には配列）

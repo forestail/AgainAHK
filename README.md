@@ -1,8 +1,11 @@
 # AgainAHK
 [増井俊之氏](https://github.com/masui)のAgainのAutoHotKey実装です。<br/>
 オリジナルはEmacs上で動作するマクロですが、AutoHotKeyで実装することにより、Windows上の全てのエディタ、アプリケーションで手軽にAgainを利用できます。
+オリジナルで実装されているndmacro.elとの組み合わせは未実装。
 
-参考：https://github.com/masui/Again
+参考：https://scrapbox.io/again/
+
+AutoHotKey版DynamicMacroは[こちら](https://github.com/forestail/DynamicMacroAHK)
 
 
 ## 使い方
@@ -23,17 +26,24 @@
 `Again.ini`の以下の部分でホットキーを設定してください。それぞれのコマンドの意味は下記の通りです。
 ```
 InvokeHotKey=^l
+SuspendHotKey=^+l
+ResetHotKey=~esc
 ```
 
 | # | コマンド          | デフォルトHK | 機能概要                                 |
-|---|-------------------|--------------|------------------------------------------|
+|---|-------------------|--------------|----------------------------------------|
 | 1 | InvokeHotKey      | ^l           | 繰り返し実行                            |
-| 2 | SuspendHotKey       | ^+l          | 本マクロの有効/無効切り替え              |
+| 2 | SuspendHotKey     | ^+l          | 本マクロの有効/無効切り替え              |
+| 3 | ResetHotKey       | ~esc         | again動作をリセット                     |
 
 ※#2は本家にはない機能ですが、Againマクロの有効・無効を切り替える機能を付けました。
 ただし、PauseではなくSuspendのためタイマー自体は停止しません。これが気持ち悪い場合は、タスクトレイから手動で本スクリプトをPuaseするか終了してください。
 
-
+#### リセット間隔
+`Again.ini`の以下の部分でagain動作をリセットする間隔を設定してください。デフォルトは1000msec(1s)になっています。
+```
+ClearInterval=1000
+```
 
 #### ログ機能
 利用状況を分析するために、ログ出力機能を付けています。<br/>
